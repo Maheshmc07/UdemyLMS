@@ -1,0 +1,111 @@
+
+<app-navbar></app-navbar>
+<div class="min-h-screen bg-gray-50 px-4 py-8 sm:px-6 lg:px-8">
+  <h1 class="text-3xl font-bold text-gray-800 mb-8 text-center">My Courses</h1>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+    <!-- Course Card -->
+
+@for (item of course; track $index) {
+   <div class="group max-w-sm w-full bg-white rounded-2xl shadow-lg overflow-hidden transform transition duration-500 hover:scale-[1.03] hover:-translate-y-2 hover:shadow-[0_20px_40px_-10px_rgba(99,102,241,0.6)] border-2 border-transparent hover:border-indigo-500 hover:border-opacity-60 hover:ring-4 hover:ring-indigo-300">
+  <!-- Thumbnail -->
+  <img src={{item.thumbnailUrl}} alt="Course Thumbnail" class="w-full h-48 object-contain ">
+
+  <!-- Content -->
+  <div class="p-4 flex flex-col flex-grow">
+    <!-- Course Name -->
+    <h2 class="text-xl font-bold text-gray-800 mb-1 group-hover:text-indigo-700 transition duration-300">
+     {{item.courseName}}
+    </h2>
+
+    <!-- Description -->
+    <p class="text-sm text-gray-600 mb-2">
+      {{item.courseDescription}}
+    </p>
+
+    <!-- Duration & Structure -->
+    <div class="text-sm text-gray-500 mb-4">
+      <p><strong>Duration:</strong> 10 weeks</p>
+      <p><strong>Structure:</strong> 50+ videos, quizzes, and assignments</p>
+    </div>
+
+    <!-- Continue Button -->
+    <div class="mt-auto">
+      <button  (click)="OpenChild(item.courseId)" class="w-full px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">
+        Continue Learning
+      </button>
+    </div>
+  </div>
+</div>
+
+
+}
+
+
+    <!-- Another Course Card -->
+   
+  </div>
+</div>
+<div
+  class="fixed inset-0 z-50 hidden backdrop-blur-sm bg-black/10 flex items-center justify-center"
+  #coursemodel
+>
+  <div
+    id="modal-card"
+    class="bg-white rounded-xl shadow-2xl max-w-2xl w-full mx-4 p-6 space-y-6 overflow-y-auto max-h-[80vh]"
+  >
+    <div class="flex justify-between items-center">
+      <h3 class="text-xl font-bold text-gray-800">📚 Course Content</h3>
+      <button
+        (click)="CloseModal()"
+        class="text-gray-500 hover:text-red-600 text-2xl leading-none"
+      >
+        &times;
+      </button>
+    </div>
+    @for (item of C_content; track $index) {
+    <div class="space-y-4">
+      <!-- Topic 1 -->
+      <div
+        class="flex items-start gap-4 p-4 bg-gray-50 border border-gray-200 rounded-lg hover:shadow-md transition"
+      >
+        <div class="mt-1">
+          <div
+            class="w-10 h-10 bg-blue-100 text-blue-600 flex items-center justify-center rounded-full"
+          >
+            <img class="object-contain"  src="{{ item.videoThumbnail }}" />
+          </div>
+        </div>
+        <div>
+          <h4 class="text-md font-semibold text-gray-800">
+            {{ item.videoTitle }}
+          </h4>
+          <p class="text-sm text-gray-600">{{ item.videoDescription }}</p>
+
+          <div class="mt-3">
+            <a
+              href="{{ item.videoUrl }}"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors duration-200 font-semibold text-sm"
+            >
+              Watch now
+            </a>
+            <span class="text-xs text-gray-500 ml-2.5"
+              >{{ item.totalDuration }} hr</span
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- Topic 2 -->
+
+      <!-- Topic 3 -->
+    </div>
+    }
+    <!-- ...your course content cards remain unchanged -->
+  </div>
+</div>
+
+
+<app-footer></app-footer>
